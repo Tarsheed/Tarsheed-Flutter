@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../../../../generated/l10n.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../data/models/consumption_interval.dart';
 
@@ -25,15 +26,15 @@ class UsageChartWidget extends StatelessWidget {
               Text(
                 'Monthly Usage',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
                   color: ColorManager.black,
                 ),
               ),
-              const SizedBox(height: 20),
+               SizedBox(height: 20.h),
               Expanded(
                 child: SizedBox(
-                  height: 200,
+                  height: 200.h,
                   child: SfCartesianChart(
                     primaryXAxis: NumericAxis(
                       minimum: 0,
@@ -59,23 +60,23 @@ class UsageChartWidget extends StatelessWidget {
                         yValueMapper: (ConsumptionInterval data, _) =>
                             data.averageUsage,
                         color: ColorManager.primary,
-                        width: 2,
+                        width: 2.w,
                         markerSettings: MarkerSettings(
                           isVisible: true,
                           shape: DataMarkerType.circle,
                           color: ColorManager.primary,
-                          width: 6,
-                          height: 6,
+                          width: 6.w,
+                          height: 6.h,
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+               SizedBox(height: 10.h),
               Center(
                 child: Text(
-                  'kWh',
+                  S.of(context).kwh,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,

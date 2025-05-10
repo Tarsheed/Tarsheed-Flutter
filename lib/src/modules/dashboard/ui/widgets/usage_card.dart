@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tarsheed/src/core/utils/color_manager.dart';
 
 class UsageCard extends StatelessWidget {
@@ -17,20 +18,20 @@ class UsageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 164,
-      height: 64,
+      width: 164.w,
+      height: 64.h,
       decoration: BoxDecoration(
         color: ColorManager.white,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(8.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
-            blurRadius: 4,
+            color: ColorManager.black12,
+            blurRadius: 4.r,
             offset: Offset(0, 2),
           ),
         ],
       ),
-      padding: const EdgeInsets.all(4),
+      padding:  EdgeInsets.all(4.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,7 +40,7 @@ class UsageCard extends StatelessWidget {
             title,
             style: TextStyle(
                 fontWeight: FontWeight.w700,
-                fontSize: 14,
+                fontSize: 14.sp,
                 color: ColorManager.black),
           ),
           Text(
@@ -47,16 +48,16 @@ class UsageCard extends StatelessWidget {
             style: TextStyle(
               color: ColorManager.primary,
               fontWeight: FontWeight.w600,
-              fontSize: 12,
+              fontSize: 12.sp,
             ),
           ),
-          SizedBox(height: 3),
+          SizedBox(height: 3.h),
           if (subtitle != null)
             Text(
               subtitle!,
               style: TextStyle(
                   color: ColorManager.black,
-                  fontSize: 5,
+                  fontSize: 5.sp,
                   fontWeight: FontWeight.w400),
               textAlign: TextAlign.center,
             ),

@@ -132,8 +132,7 @@ class _ReportContentSection extends StatelessWidget {
           BuildInfoCard(
             icon: Icons.show_chart,
             title: S.of(context).avgUsage,
-            value: '${report.averageConsumption.toStringAsFixed(2)} kWh',
-            percentage: '${report.savingsPercentage}%',
+            value: '${report.averageConsumption.toStringAsFixed(2)} ${S.of(context).kwh}',            percentage: '${report.savingsPercentage}%',
             isDecrease: report.savingsPercentage > 0,
             color: ColorManager.primary,
           ),
@@ -206,12 +205,12 @@ class _UsageForecastSection extends StatelessWidget {
       children: [
         UsageCard(
           title: S.of(context).lastMonthUsage,
-          value: '$lastMonthUsage kWh',
+          value: '$lastMonthUsage ${S.of(context).kwh}',
         ),
         SizedBox(width: 12.w),
         UsageCard(
           title: S.of(context).currentMonthUsage,
-          value: '$nextMonthUsage kWh',
+          value: '$nextMonthUsage ${S.of(context).kwh}',
           subtitle: S.of(context).projectedBasedOnUsageHistory,
         ),
       ],

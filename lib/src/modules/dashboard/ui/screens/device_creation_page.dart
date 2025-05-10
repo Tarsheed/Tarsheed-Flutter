@@ -4,11 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tarsheed/generated/l10n.dart';
 import 'package:tarsheed/src/core/routing/navigation_manager.dart';
+import 'package:tarsheed/src/core/utils/image_manager.dart';
+import 'package:tarsheed/src/core/utils/color_manager.dart';
 import 'package:tarsheed/src/core/widgets/large_button.dart';
-import '../../../../core/utils/localization_manager.dart';
 import '../../bloc/dashboard_bloc.dart';
 import '../../data/models/device_creation_form.dart';
-import '../../data/models/sensor_category.dart';
 
 enum SensorCategory {
   temperature,
@@ -16,32 +16,33 @@ enum SensorCategory {
   motion,
   vibration,
 }
+
 extension SensorImagePath on SensorCategory {
   String get imagePath {
     switch (this) {
       case SensorCategory.temperature:
-        return 'assets/images/temp.jpeg';
+        return AssetsManager.temperatureSensor;
       case SensorCategory.current:
-        return 'assets/images/cuur.jpeg';
+        return AssetsManager.currentSensor;
       case SensorCategory.motion:
-        return 'assets/images/mothion.jpg';
+        return AssetsManager.motionSensor;
       case SensorCategory.vibration:
-        return 'assets/images/vib.jpeg';
+        return AssetsManager.vibrationSensor;
     }
   }
 }
+
 extension SensorData on SensorCategory {
-  String get name {
-    bool isArabic = LocalizationManager.currentLocaleIndex == 0;
+  String localizedName(BuildContext context) {
     switch (this) {
       case SensorCategory.temperature:
-        return isArabic ? "مستشعر حرارة" : "Temperature Sensor";
+        return S.of(context).temperatureSensor;
       case SensorCategory.current:
-        return isArabic ? "مستشعر التيار" : "Current Sensor";
+        return S.of(context).currentSensor;
       case SensorCategory.motion:
-        return isArabic ? "مستشعر الحركة" : "Motion Sensor";
+        return S.of(context).motionSensor;
       case SensorCategory.vibration:
-        return isArabic ? "مستشعر الاهتزاز" : "Vibration Sensor";
+        return S.of(context).vibrationSensor;
     }
   }
 
@@ -58,6 +59,7 @@ extension SensorData on SensorCategory {
     }
   }
 }
+
 class DeviceCreationPage extends StatefulWidget {
   @override
   _DeviceCreationPageState createState() => _DeviceCreationPageState();
@@ -72,65 +74,60 @@ class _DeviceCreationPageState extends State<DeviceCreationPage> {
   String? selectedRoomId;
   String? selectedCategoryId;
   SensorCategory? selectedSensorType;
-  List<String> rooms = [];
   int? selectedPriority;
 
   @override
   Widget build(BuildContext context) {
-    bool isArabic = LocalizationManager.currentLocaleIndex == 0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Add Device')),
-      body: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(16.0.w),
+      appBar: AppBar(
+        title: Text(S.of(context).addDevice),
+        backgroundColor: ColorManager.primary,
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.w),
+        child: Column(
+          children: [
+            Expanded(
               child: ListView(
                 children: [
                   TextField(
                     controller: nameController,
-                    decoration: const InputDecoration(labelText: 'Device Name'),
+                    decoration: InputDecoration(labelText: S.of(context).deviceName),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12.h),
                   TextField(
                     controller: descriptionController,
-                    decoration: const InputDecoration(labelText: 'Description'),
+                    decoration: InputDecoration(labelText: S.of(context).description),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12.h),
                   TextField(
                     controller: pinNumberController,
-                    decoration: const InputDecoration(labelText: 'Pin Number'),
+                    decoration: InputDecoration(labelText: S.of(context).pinNumber),
                   ),
-                  const SizedBox(height: 12),
-                  /// Room Dropdown
+                  SizedBox(height: 12.h),
                   BlocBuilder<DashboardBloc, DashboardState>(
                     builder: (context, state) {
                       final rooms = context.read<DashboardBloc>().rooms;
                       return DropdownButtonFormField<String>(
                         value: selectedRoomId,
-                        hint: const Text('Select Room'),
+                        hint: Text(S.of(context).selectRoom),
                         items: rooms.map((room) {
                           return DropdownMenuItem<String>(
                             value: room.id,
                             child: Text(room.name),
                           );
                         }).toList(),
-                        onChanged: (value) =>
-                            setState(() => selectedRoomId = value),
+                        onChanged: (value) => setState(() => selectedRoomId = value),
                       );
                     },
                   ),
-                  const SizedBox(height: 12),
-
-                  /// Category Dropdown from Bloc
+                  SizedBox(height: 12.h),
                   BlocBuilder<DashboardBloc, DashboardState>(
                     builder: (context, state) {
                       return DropdownButtonFormField<String>(
                         value: selectedCategoryId,
                         decoration: InputDecoration(
-                          labelText: LocalizationManager.currentLocaleIndex == 0
-                              ? 'اختر الفئة'
-                              : 'Select Category',
+                          labelText: S.of(context).selectCategory,
                         ),
                         items: DashboardBloc.get().categories.map((category) {
                           return DropdownMenuItem(
@@ -138,17 +135,15 @@ class _DeviceCreationPageState extends State<DeviceCreationPage> {
                             child: Text(category.name),
                           );
                         }).toList(),
-                        onChanged: (val) =>
-                            setState(() => selectedCategoryId = val),
+                        onChanged: (val) => setState(() => selectedCategoryId = val),
                       );
                     },
                   ),
-                  /// sensors Dropdown
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12.h),
                   DropdownButtonFormField<SensorCategory>(
                     value: selectedSensorType,
                     decoration: InputDecoration(
-                      labelText: isArabic ? 'اختر جهاز الاستشعار' : 'Select Sensor',
+                      labelText: S.of(context).selectSensor,
                     ),
                     items: SensorCategory.values.map((type) {
                       return DropdownMenuItem<SensorCategory>(
@@ -157,25 +152,22 @@ class _DeviceCreationPageState extends State<DeviceCreationPage> {
                           children: [
                             Image.asset(
                               type.imagePath,
-                              width: 30,
-                              height: 30,
+                              width: 30.w,
+                              height: 30.h,
                             ),
-                            SizedBox(width: 10),
-                            Text(type.name),
+                            SizedBox(width: 10.w),
+                            Text(type.localizedName(context)),
                           ],
                         ),
                       );
                     }).toList(),
-                    onChanged: (value) =>
-                        setState(() => selectedSensorType = value),
+                    onChanged: (value) => setState(() => selectedSensorType = value),
                   ),
-
-                  const SizedBox(height: 12),
-                  /// priority Dropdown
+                  SizedBox(height: 12.h),
                   DropdownButtonFormField<int>(
                     value: selectedPriority,
                     decoration: InputDecoration(
-                      labelText: isArabic ? 'أولوية الجهاز' : 'Device Priority',
+                      labelText: S.of(context).devicePriority,
                       border: OutlineInputBorder(),
                     ),
                     items: [
@@ -183,13 +175,11 @@ class _DeviceCreationPageState extends State<DeviceCreationPage> {
                         value: 1,
                         child: Row(
                           children: [
-                            const Icon(Icons.warning, color: Colors.red),
-                            const SizedBox(width: 8),
+                            Icon(Icons.warning, color: ColorManager.red),
+                            SizedBox(width: 8.w),
                             Text(
-                              isArabic
-                                  ? 'أولوية ١ - شديدة الأهمية'
-                                  : 'Priority 1 - Critical',
-                              style: const TextStyle(color: Colors.red),
+                              S.of(context).priority1,
+                              style: TextStyle(color: ColorManager.red),
                             ),
                           ],
                         ),
@@ -198,13 +188,11 @@ class _DeviceCreationPageState extends State<DeviceCreationPage> {
                         value: 2,
                         child: Row(
                           children: [
-                            const Icon(Icons.error_outline, color: Colors.orange),
-                            const SizedBox(width: 8),
+                            Icon(Icons.error_outline, color: ColorManager.orange),
+                            SizedBox(width: 8.w),
                             Text(
-                              isArabic
-                                  ? 'أولوية ٢ - مهمة'
-                                  : 'Priority 2 - Important',
-                              style: const TextStyle(color: Colors.orange),
+                              S.of(context).priority2,
+                              style: TextStyle(color: ColorManager.orange),
                             ),
                           ],
                         ),
@@ -213,13 +201,11 @@ class _DeviceCreationPageState extends State<DeviceCreationPage> {
                         value: 3,
                         child: Row(
                           children: [
-                            const Icon(Icons.info_outline, color: Colors.blue),
-                            const SizedBox(width: 8),
+                            Icon(Icons.info_outline, color: ColorManager.primary),
+                            SizedBox(width: 8.w),
                             Text(
-                              isArabic
-                                  ? 'أولوية ٣ - متوسطة'
-                                  : 'Priority 3 - Moderate',
-                              style: const TextStyle(color: Colors.blue),
+                              S.of(context).priority3,
+                              style: TextStyle(color: ColorManager.primary),
                             ),
                           ],
                         ),
@@ -228,13 +214,11 @@ class _DeviceCreationPageState extends State<DeviceCreationPage> {
                         value: 4,
                         child: Row(
                           children: [
-                            const Icon(Icons.low_priority, color: Colors.grey),
-                            const SizedBox(width: 8),
+                            Icon(Icons.low_priority, color: ColorManager.grey),
+                            SizedBox(width: 8.w),
                             Text(
-                              isArabic
-                                  ? 'أولوية ٤ - غير مهمة'
-                                  : 'Priority 4 - Low',
-                              style: const TextStyle(color: Colors.grey),
+                              S.of(context).priority4,
+                              style: TextStyle(color: ColorManager.grey),
                             ),
                           ],
                         ),
@@ -246,19 +230,16 @@ class _DeviceCreationPageState extends State<DeviceCreationPage> {
                       });
                     },
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                 ],
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(16.0.w),
-            child: SizedBox(
-              width: double.maxFinite,
+            SizedBox(
+              width: double.infinity,
               child: BlocConsumer<DashboardBloc, DashboardState>(
                 listener: (context, state) {
                   if (state is AddDeviceSuccess) {
-                    Fluttertoast.showToast(msg: "device added successfully");
+                    Fluttertoast.showToast(msg: S.of(context).deviceAddedSuccessfully);
                     context.pop();
                   }
                 },
@@ -269,33 +250,29 @@ class _DeviceCreationPageState extends State<DeviceCreationPage> {
                     current is AddDeviceError,
                 builder: (context, state) {
                   return DefaultButton(
-                      title: S.of(context).save,
-                      isLoading: state is AddDeviceLoading,
-                      onPressed: () {
-                        if (_validateInputs()) {
-                          final form = DeviceCreationForm(
-                            name: nameController.text,
-                            description: descriptionController.text,
-                            pinNumber: pinNumberController.text,
-                            roomId: selectedRoomId!,
-                            categoryId: selectedCategoryId!,
-                            priority:
-                            int.tryParse(priorityController.text) ?? 1,
-                          );
+                    title: S.of(context).save,
+                    isLoading: state is AddDeviceLoading,
+                    onPressed: () {
+                      if (_validateInputs()) {
+                        final form = DeviceCreationForm(
+                          name: nameController.text,
+                          description: descriptionController.text,
+                          pinNumber: pinNumberController.text,
+                          roomId: selectedRoomId!,
+                          categoryId: selectedCategoryId!,
+                          priority: selectedPriority ?? 1,
+                        );
 
-                          context
-                              .read<DashboardBloc>()
-                              .add(AddDeviceEvent(form));
-                        }
-                      });
+                        context.read<DashboardBloc>().add(AddDeviceEvent(form));
+                      }
+                    },
+                  );
                 },
               ),
             ),
-          ),
-          SizedBox(
-            height: 10.h,
-          )
-        ],
+            SizedBox(height: 10.h),
+          ],
+        ),
       ),
     );
   }
@@ -306,12 +283,10 @@ class _DeviceCreationPageState extends State<DeviceCreationPage> {
         pinNumberController.text.isEmpty ||
         selectedRoomId == null ||
         selectedCategoryId == null ||
-        priorityController.text.isEmpty) {
+        selectedPriority == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(LocalizationManager.currentLocaleIndex == 0
-              ? 'يرجى ملء جميع الحقول'
-              : 'Please fill all fields'),
+          content: Text(S.of(context).pleaseFillAllFields),
         ),
       );
       return false;

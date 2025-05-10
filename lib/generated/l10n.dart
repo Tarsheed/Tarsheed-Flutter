@@ -1259,6 +1259,366 @@ class S {
       args: [],
     );
   }
+
+  /// `Add Sensor`
+  String get addSensor {
+    return Intl.message('Add Sensor', name: 'addSensor', desc: '', args: []);
+  }
+
+  /// `Sensor Name`
+  String get sensorName {
+    return Intl.message('Sensor Name', name: 'sensorName', desc: '', args: []);
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message('Description', name: 'description', desc: '', args: []);
+  }
+
+  /// `Pin Number`
+  String get pinNumber {
+    return Intl.message('Pin Number', name: 'pinNumber', desc: '', args: []);
+  }
+
+  /// `Select Room`
+  String get selectRoom {
+    return Intl.message('Select Room', name: 'selectRoom', desc: '', args: []);
+  }
+
+  /// `Select Sensor Type`
+  String get selectSensorType {
+    return Intl.message(
+      'Select Sensor Type',
+      name: 'selectSensorType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Temperature Sensor`
+  String get temperatureSensor {
+    return Intl.message(
+      'Temperature Sensor',
+      name: 'temperatureSensor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Sensor`
+  String get currentSensor {
+    return Intl.message(
+      'Current Sensor',
+      name: 'currentSensor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Motion Sensor`
+  String get motionSensor {
+    return Intl.message(
+      'Motion Sensor',
+      name: 'motionSensor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vibration Sensor`
+  String get vibrationSensor {
+    return Intl.message(
+      'Vibration Sensor',
+      name: 'vibrationSensor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Device`
+  String get addDevice {
+    return Intl.message('Add Device', name: 'addDevice', desc: '', args: []);
+  }
+
+  /// `Device Name`
+  String get deviceName {
+    return Intl.message('Device Name', name: 'deviceName', desc: '', args: []);
+  }
+
+  /// `Select Category`
+  String get selectCategory {
+    return Intl.message(
+      'Select Category',
+      name: 'selectCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Sensor`
+  String get selectSensor {
+    return Intl.message(
+      'Select Sensor',
+      name: 'selectSensor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Device Priority`
+  String get devicePriority {
+    return Intl.message(
+      'Device Priority',
+      name: 'devicePriority',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Priority 1 - Critical`
+  String get priority1 {
+    return Intl.message(
+      'Priority 1 - Critical',
+      name: 'priority1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Priority 2 - Important`
+  String get priority2 {
+    return Intl.message(
+      'Priority 2 - Important',
+      name: 'priority2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Priority 3 - Moderate`
+  String get priority3 {
+    return Intl.message(
+      'Priority 3 - Moderate',
+      name: 'priority3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Priority 4 - Low`
+  String get priority4 {
+    return Intl.message(
+      'Priority 4 - Low',
+      name: 'priority4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please fill all fields`
+  String get pleaseFillAllFields {
+    return Intl.message(
+      'Please fill all fields',
+      name: 'pleaseFillAllFields',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Device added successfully`
+  String get deviceAddedSuccessfully {
+    return Intl.message(
+      'Device added successfully',
+      name: 'deviceAddedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Devices`
+  String get devices {
+    return Intl.message('Devices', name: 'devices', desc: '', args: []);
+  }
+
+  /// `Device deleted successfully`
+  String get deviceDeletedSuccessfully {
+    return Intl.message(
+      'Device deleted successfully',
+      name: 'deviceDeletedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Jan`
+  String get jan {
+    return Intl.message('Jan', name: 'jan', desc: '', args: []);
+  }
+
+  /// `Feb`
+  String get feb {
+    return Intl.message('Feb', name: 'feb', desc: '', args: []);
+  }
+
+  /// `Mar`
+  String get mar {
+    return Intl.message('Mar', name: 'mar', desc: '', args: []);
+  }
+
+  /// `Apr`
+  String get apr {
+    return Intl.message('Apr', name: 'apr', desc: '', args: []);
+  }
+
+  /// `May`
+  String get may {
+    return Intl.message('May', name: 'may', desc: '', args: []);
+  }
+
+  /// `Jun`
+  String get jun {
+    return Intl.message('Jun', name: 'jun', desc: '', args: []);
+  }
+
+  /// `Jul`
+  String get jul {
+    return Intl.message('Jul', name: 'jul', desc: '', args: []);
+  }
+
+  /// `Aug`
+  String get aug {
+    return Intl.message('Aug', name: 'aug', desc: '', args: []);
+  }
+
+  /// `Sep`
+  String get sep {
+    return Intl.message('Sep', name: 'sep', desc: '', args: []);
+  }
+
+  /// `Oct`
+  String get oct {
+    return Intl.message('Oct', name: 'oct', desc: '', args: []);
+  }
+
+  /// `Nov`
+  String get nov {
+    return Intl.message('Nov', name: 'nov', desc: '', args: []);
+  }
+
+  /// `Dec`
+  String get dec {
+    return Intl.message('Dec', name: 'dec', desc: '', args: []);
+  }
+
+  /// `AM`
+  String get am {
+    return Intl.message('AM', name: 'am', desc: '', args: []);
+  }
+
+  /// `PM`
+  String get pm {
+    return Intl.message('PM', name: 'pm', desc: '', args: []);
+  }
+
+  /// `kWh`
+  String get kwh {
+    return Intl.message('kWh', name: 'kwh', desc: '', args: []);
+  }
+
+  /// `Low`
+  String get priorityLow {
+    return Intl.message('Low', name: 'priorityLow', desc: '', args: []);
+  }
+
+  /// `Medium`
+  String get priorityMedium {
+    return Intl.message('Medium', name: 'priorityMedium', desc: '', args: []);
+  }
+
+  /// `High`
+  String get priorityHigh {
+    return Intl.message('High', name: 'priorityHigh', desc: '', args: []);
+  }
+
+  /// `Delete Device`
+  String get deleteDeviceTitle {
+    return Intl.message(
+      'Delete Device',
+      name: 'deleteDeviceTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this device?`
+  String get deleteDeviceConfirmation {
+    return Intl.message(
+      'Are you sure you want to delete this device?',
+      name: 'deleteDeviceConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes, Delete`
+  String get yesDelete {
+    return Intl.message('Yes, Delete', name: 'yesDelete', desc: '', args: []);
+  }
+
+  /// `Search devices..`
+  String get searchDevices {
+    return Intl.message(
+      'Search devices..',
+      name: 'searchDevices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Consumption`
+  String get consumption {
+    return Intl.message('Consumption', name: 'consumption', desc: '', args: []);
+  }
+
+  /// `Rooms`
+  String get rooms {
+    return Intl.message('Rooms', name: 'rooms', desc: '', args: []);
+  }
+
+  /// `Priority`
+  String get priority {
+    return Intl.message('Priority', name: 'priority', desc: '', args: []);
+  }
+
+  /// `Edit Device`
+  String get editDeviceTitle {
+    return Intl.message(
+      'Edit Device',
+      name: 'editDeviceTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Title`
+  String get noTitle {
+    return Intl.message('No Title', name: 'noTitle', desc: '', args: []);
+  }
+
+  /// `No Value`
+  String get noValue {
+    return Intl.message('No Value', name: 'noValue', desc: '', args: []);
+  }
+
+  /// `Failed to edit device`
+  String get failedToEditDevice {
+    return Intl.message(
+      'Failed to edit device',
+      name: 'failedToEditDevice',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

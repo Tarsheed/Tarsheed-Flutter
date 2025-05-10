@@ -8,4 +8,9 @@ class AssetsManager {
   static const String avatar = "assets/images/avatar.png";
   static const String errorIcon = "assets/images/error_icon.png";
   static const String noDataFound = "assets/images/no_data_found.png";
+  static const String temperatureSensor = "assets/images/temp.jpeg";
+  static const String currentSensor = "assets/images/cuur.jpeg";
+  static const String motionSensor = "assets/images/mothion.jpg";
+  static const String vibrationSensor = "assets/images/vib.jpeg";
+  static const String vector =   "assets/images/Vector.png";
 }

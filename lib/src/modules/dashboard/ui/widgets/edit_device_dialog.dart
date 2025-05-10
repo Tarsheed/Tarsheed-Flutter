@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tarsheed/generated/l10n.dart';
+import 'package:tarsheed/src/core/utils/color_manager.dart';
 import '../../bloc/dashboard_bloc.dart';
 import '../../data/models/device.dart';
-import '../../../../core/utils/color_manager.dart';
 
 class EditDeviceDialog extends StatefulWidget {
   final Device device;
-  const EditDeviceDialog({Key? key, required this.device}) : super(key: key);
+  const EditDeviceDialog({super.key, required this.device});
 
   @override
   State<EditDeviceDialog> createState() => _EditDeviceDialogState();
@@ -37,41 +39,45 @@ class _EditDeviceDialogState extends State<EditDeviceDialog> {
           Navigator.of(context).pop();
         } else if (state is EditDeviceError) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Failed to edit device')),
+            SnackBar(content: Text(S.of(context).failedToEditDevice)),
           );
         }
       },
       child: AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('Edit Device'),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+        title: Text(S.of(context).editDeviceTitle),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _buildTextField('Device Name', nameController),
-              const SizedBox(height: 10),
-              _buildTextField('Description', descriptionController),
-              const SizedBox(height: 10),
-              _buildTextField('Pin Number', pinNumberController),
+              _buildTextField(S.of(context).deviceName, nameController),
+              SizedBox(height: 10.h),
+              _buildTextField(S.of(context).description, descriptionController),
+              SizedBox(height: 10.h),
+              _buildTextField(S.of(context).pinNumber, pinNumberController),
             ],
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(S.of(context).cancel),
           ),
           ElevatedButton(
             onPressed: isModified && !isLoading ? _onSavePressed : null,
             style: ElevatedButton.styleFrom(
-              backgroundColor: isModified ? ColorManager.primary : Colors.grey,
+              backgroundColor: isModified ? ColorManager.primary : ColorManager.grey,
             ),
             child: isLoading
-                ? const SizedBox(
-              width: 20, height: 20,
-              child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+                ? SizedBox(
+              width: 20.w,
+              height: 20.h,
+              child: CircularProgressIndicator(
+                color: ColorManager.white,
+                strokeWidth: 2.w,
+              ),
             )
-                : const Text('Save'),
+                : Text(S.of(context).save),
           ),
         ],
       ),

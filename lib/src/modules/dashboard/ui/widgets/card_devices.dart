@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tarsheed/generated/l10n.dart';
 import 'package:tarsheed/src/modules/dashboard/bloc/dashboard_bloc.dart';
 import 'package:tarsheed/src/modules/dashboard/data/models/category.dart';
-
-import '../../../../core/utils/color_manager.dart';
+import 'package:tarsheed/src/core/utils/color_manager.dart';
 import '../../data/models/device.dart';
 
 class DeviceCard extends StatelessWidget {
@@ -27,7 +27,7 @@ class DeviceCard extends StatelessWidget {
     final dashboardBloc = context.read<DashboardBloc>();
 
     final deviceCategory = dashboardBloc.categories.firstWhere(
-        (category) => category.id == device.categoryId,
+            (category) => category.id == device.categoryId,
         orElse: () => DeviceCategory.empty);
 
     return SizedBox(
@@ -36,15 +36,15 @@ class DeviceCard extends StatelessWidget {
       child: GestureDetector(
         onLongPress: onDelete,
         child: Container(
-          padding: const EdgeInsets.all(12),
+          padding: EdgeInsets.all(12.w),
           decoration: BoxDecoration(
-            color: device.state ? ColorManager.primary : Colors.grey.shade200,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: const [
+            color: device.state ? ColorManager.primary : ColorManager.grey200,
+            borderRadius: BorderRadius.circular(16.r),
+            boxShadow: [
               BoxShadow(
-                color: Colors.black12,
-                blurRadius: 6,
-                offset: Offset(0, 3),
+                color: ColorManager.black12,
+                blurRadius: 6.r,
+                offset: Offset(0, 3.h),
               ),
             ],
           ),
@@ -60,8 +60,8 @@ class DeviceCard extends StatelessWidget {
                       Switch(
                         value: device.state,
                         onChanged: onToggle,
-                        activeColor: Colors.white,
-                        inactiveThumbColor: Colors.grey.shade400,
+                        activeColor: ColorManager.white,
+                        inactiveThumbColor: ColorManager.grey,
                       ),
                     ],
                   ),
@@ -69,54 +69,54 @@ class DeviceCard extends StatelessWidget {
                     device.name,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       color: textColor,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4.h),
                   Text(
                     device.description,
                     style: TextStyle(
                       color: textColor.withOpacity(0.8),
-                      fontSize: 12,
+                      fontSize: 12.sp,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.h),
                   Row(
                     children: [
                       Icon(
                         Icons.bolt,
-                        size: 16,
+                        size: 16.sp,
                         color: textColor.withOpacity(0.9),
                       ),
-                      const SizedBox(width: 4),
+                      SizedBox(width: 4.w),
                       Text(
-                        '${device.consumption.toStringAsFixed(1)} kW/h',
+                        '${device.consumption.toStringAsFixed(1)} ${S.of(context).kwh}',
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 12.sp,
                           fontWeight: FontWeight.w500,
                           color: textColor.withOpacity(0.9),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 6),
+                  SizedBox(height: 6.h),
                   Row(
                     children: [
                       Icon(
                         Icons.priority_high,
-                        size: 16,
+                        size: 16.sp,
                         color: textColor.withOpacity(0.9),
                       ),
-                      const SizedBox(width: 4),
+                      SizedBox(width: 4.w),
                       Text(
-                        _getPriorityText(device.priority),
+                        _getPriorityText(device.priority, context),
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 12.sp,
                           fontWeight: FontWeight.w500,
                           color: textColor.withOpacity(0.9),
                         ),
@@ -126,20 +126,19 @@ class DeviceCard extends StatelessWidget {
                 ],
               ),
               Positioned(
-                bottom: 4,
-                right: 4,
+                bottom: 4.h,
+                right: 4.w,
                 child: GestureDetector(
                   onTap: onEdit,
                   child: Container(
-                    padding: const EdgeInsets.all(4),
+                    padding: EdgeInsets.all(4.w),
                     decoration: BoxDecoration(
-                      color:
-                          device.state ? Colors.white24 : Colors.grey.shade300,
+                      color: device.state ? ColorManager.white : ColorManager.grey300,
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
                       Icons.edit,
-                      size: 16,
+                      size: 16.sp,
                       color: textColor,
                     ),
                   ),
@@ -160,30 +159,30 @@ class DeviceCard extends StatelessWidget {
           return state is GetDevicesLoading
               ? SizedBox()
               : Image.network(
-                  category.iconUrl,
-                  height: 40,
-                  width: 40,
-                  color: color,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Icon(
-                      Icons.devices,
-                      size: 40,
-                      color: color,
-                    );
-                  },
-                );
+            category.iconUrl,
+            height: 40.h,
+            width: 40.w,
+            color: color,
+            errorBuilder: (context, error, stackTrace) {
+              return Icon(
+                Icons.devices,
+                size: 40.sp,
+                color: color,
+              );
+            },
+          );
         },
       );
     } else {
       return Image.asset(
         category.iconUrl,
-        height: 40,
-        width: 40,
+        height: 40.h,
+        width: 40.w,
         color: color,
         errorBuilder: (context, error, stackTrace) {
           return Icon(
             _getCategoryIcon(category.id),
-            size: 40,
+            size: 40.sp,
             color: color,
           );
         },
@@ -191,13 +190,13 @@ class DeviceCard extends StatelessWidget {
     }
   }
 
-  String _getPriorityText(int priority) {
+  String _getPriorityText(int priority, BuildContext context) {
     if (priority <= 3) {
-      return 'Low';
+      return S.of(context).priorityLow;
     } else if (priority <= 7) {
-      return 'Medium';
+      return S.of(context).priorityMedium;
     } else {
-      return 'High';
+      return S.of(context).priorityHigh;
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tarsheed/src/core/utils/color_manager.dart';
 
 class MonthNavigator extends StatefulWidget {
@@ -49,7 +50,7 @@ class _MonthNavigatorState extends State<MonthNavigator> {
         ),
         Text(
           _formatMonthYear(),
-          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16,color: ColorManager.black),
+          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.sp,color: ColorManager.black),
         ),
         IconButton(
           icon: Icon(Icons.chevron_right),

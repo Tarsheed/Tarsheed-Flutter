@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tarsheed/src/core/utils/color_manager.dart';
 
 class PeriodFilter extends StatefulWidget {
@@ -29,7 +30,7 @@ class _PeriodFilterState extends State<PeriodFilter> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 20),
+      margin:  EdgeInsets.only(bottom: 20.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(widget.periods.length, (index) {
@@ -46,20 +47,20 @@ class _PeriodFilterState extends State<PeriodFilter> {
                   widget.periods[index],
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     color: _selectedPeriodIndex == index
                         ? ColorManager.primary
                         : ColorManager.black,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.h),
                 Container(
-                  width: 8,
-                  height: 8,
+                  width: 8.w,
+                  height: 8.h,
                   decoration: BoxDecoration(
                     color: _selectedPeriodIndex == index
                         ? ColorManager.primary
-                        : Colors.transparent,
+                        : ColorManager.transparent,
                     shape: BoxShape.circle,
                   ),
                 ),

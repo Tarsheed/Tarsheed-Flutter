@@ -1,4 +1,3 @@
-import 'dart:ui_web';
 
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:tarsheed/src/core/services/app_initializer.dart';
 import 'package:tarsheed/src/core/utils/color_manager.dart';
 import 'package:tarsheed/src/core/utils/image_manager.dart';
+import 'dart:ui';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

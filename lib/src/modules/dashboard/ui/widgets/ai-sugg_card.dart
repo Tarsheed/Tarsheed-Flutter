@@ -27,7 +27,7 @@ class AISuggestionCard extends StatelessWidget {
               suggestion,
               style: TextStyle(
                 fontSize: 14.sp,
-                color: Colors.black87,
+                color: ColorManager.black,
               ),
             ),
           ),

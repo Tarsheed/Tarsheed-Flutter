@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tarsheed/src/core/utils/color_manager.dart';
 
 class CustomTextWidget extends StatelessWidget {
   final String label;
@@ -14,10 +15,10 @@ class CustomTextWidget extends StatelessWidget {
     return TextStyle(
       fontSize: fontSize,
       fontWeight: FontWeight.w600,
-      color: Colors.black,
+      color: ColorManager.black,
       shadows: [
         Shadow(
-          color: Colors.black.withOpacity(0.5),
+          color: ColorManager.black.withOpacity(0.5),
 
         ),
       ],

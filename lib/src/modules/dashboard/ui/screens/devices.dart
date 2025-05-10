@@ -5,6 +5,7 @@ import 'package:tarsheed/src/core/utils/color_manager.dart';
 import 'package:tarsheed/src/core/widgets/core_widgets.dart';
 import 'package:tarsheed/src/modules/dashboard/data/models/room.dart';
 
+import '../../../../../generated/l10n.dart';
 import '../../../../core/error/exception_manager.dart';
 import '../../../../core/widgets/appbar.dart';
 import '../../../../core/widgets/rectangle_background.dart';
@@ -41,21 +42,21 @@ class _DevicesScreenContent extends StatelessWidget {
       backgroundColor: ColorManager.white,
       extendBody: true,
       body: Container(
-        decoration: const BoxDecoration(color: Colors.transparent),
+        decoration:  BoxDecoration(color: ColorManager.transparent),
         child: Stack(
           children: [
             const Positioned.fill(child: BackGroundRectangle()),
             SingleChildScrollView(
               child: Column(
                 children: [
-                  const CustomAppBar(text: 'Devices'),
-                  const SizedBox(height: 10),
+                   CustomAppBar(text:  S.of(context).devices),
+                  SizedBox(height: 10.h),
                   const DeviceSearchBar(),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   const DeviceFilterHeader(),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: EdgeInsets.all(12.w),
                     child: DevicesListView(),
                   ),
                 ],
@@ -139,7 +140,7 @@ class DevicesListView extends StatelessWidget {
       listener: (context, state) {
         if (state is DeleteDeviceSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Device deleted successfully')),
+             SnackBar(content: Text(S.of(context).deviceDeletedSuccessfully)),
           );
         } else if (state is DeleteDeviceError) {
           ExceptionManager.showMessage(state.exception);
@@ -186,10 +187,10 @@ class DevicesListView extends StatelessWidget {
 
   Widget _buildGridView(List<Device> devices, BuildContext context) {
     return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisSpacing: 8.0,
-        crossAxisSpacing: 8.0,
+        mainAxisSpacing: 8.h,
+        crossAxisSpacing: 8.w,
       ),
       itemCount: devices.length,
       shrinkWrap: true,
@@ -219,11 +220,11 @@ class DevicesListView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              padding:  EdgeInsets.symmetric(vertical: 8.0.h),
               child: Text(
                 roomName,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
                   color: ColorManager.primary,
                 ),
